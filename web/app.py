@@ -1,194 +1,90 @@
-# =========================================================
-# 🌍 STRATEGIC GEOSPATIAL ECOSYSTEM – STREAMLIT VERSION
-# Author: Dr Mahamadou CAMARA
-# =========================================================
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-import streamlit as st
-import folium
-from streamlit_folium import st_folium
+<title>Strategic Geospatial Ecosystem</title>
 
-# =========================================================
-# PAGE CONFIG
-# =========================================================
-st.set_page_config(
-    page_title="Strategic Geospatial Ecosystem",
-    layout="wide"
-)
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 
-# =========================================================
-# LANGUAGE SYSTEM
-# =========================================================
-lang = st.sidebar.selectbox("🌐 Language / Langue", ["EN", "FR"])
-
-def t(en, fr):
-    return fr if lang == "FR" else en
-
-# =========================================================
-# HEADER (HERO SECTION)
-# =========================================================
-st.markdown(f"""
 <style>
-.hero {{
-    background: linear-gradient(rgba(0,20,10,0.75), rgba(0,40,20,0.85)),
-    url('https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57730/mali_amo_2009240_lrg.jpg');
-    background-size: cover;
-    padding: 120px 20px;
-    text-align: center;
-    color: white;
-}}
-.card {{
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
-}}
+body{font-family:'Poppins',sans-serif;margin:0;background:#f4f7fb;}
+header{
+color:white;text-align:center;padding:140px 20px;
+background:linear-gradient(rgba(0,20,10,0.75), rgba(0,40,20,0.85)),
+url('https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57730/mali_amo_2009240_lrg.jpg');
+background-size:cover;
+}
+h1{font-size:42px;}
+nav{background:white;padding:15px;text-align:center;position:sticky;top:0;}
+nav a{margin:10px;cursor:pointer;font-weight:500;}
+section{display:none;padding:60px;}
+section.active{display:block;}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;}
+.card{background:white;padding:20px;border-radius:10px;}
+#map{height:500px;}
+footer{background:#003d1f;color:white;text-align:center;padding:20px;}
 </style>
+</head>
 
-<div class="hero">
-<h1>{t("STRATEGIC GEOSPATIAL ECOSYSTEM","ÉCOSYSTÈME GÉOSPATIAL STRATÉGIQUE")}</h1>
-<p>{t("Geospatial Data Scientist | Remote Sensing | AI","Scientifique des données géospatiales | Télédétection | IA")}</p>
-<p>{t("Earth Observation • Research • Innovation","Observation de la Terre • Recherche • Innovation")}</p>
+<body>
+
+<header>
+<h1 id="title">STRATEGIC GEOSPATIAL ECOSYSTEM</h1>
+<p id="subtitle">Geospatial Data Scientist | Remote Sensing | AI</p>
+</header>
+
+<nav>
+<a onclick="show('home')">Home</a>
+<a onclick="show('projects')">Projects</a>
+<a onclick="show('mapSection')">Map</a>
+<a onclick="show('contact')">Contact</a>
+</nav>
+
+<section id="home" class="active">
+<h2>Portfolio</h2>
+<p>International geospatial research platform.</p>
+</section>
+
+<section id="projects">
+<h2>Projects</h2>
+<div class="cards">
+<div class="card">Geospatial Ecosystem</div>
+<div class="card">Population Mapping Mali</div>
 </div>
-""", unsafe_allow_html=True)
+</section>
 
-# =========================================================
-# NAVIGATION
-# =========================================================
-menu = st.sidebar.radio("Navigation", [
-    "Home", "Research Hub", "Projects",
-    "Monitoring", "Map",
-    "Scholar", "Timeline",
-    "Partners", "Funding", "Contact"
-])
+<section id="mapSection">
+<h2>Interactive Map</h2>
+<div id="map"></div>
+</section>
 
-# =========================================================
-# HOME
-# =========================================================
-if menu == "Home":
-    st.title(t("Academic Portfolio","Portfolio Académique"))
-    st.write(t(
-        "International Geospatial Research Portfolio",
-        "Portfolio international en géospatial"
-    ))
+<section id="contact">
+<h2>Contact</h2>
+<p>Email: mahamadoucamaramoc@outlook.com</p>
+</section>
 
-# =========================================================
-# RESEARCH HUB
-# =========================================================
-elif menu == "Research Hub":
-    st.title(t("Research Hub","Hub de Recherche"))
+<footer>
+© 2026 Dr Mahamadou CAMARA
+</footer>
 
-    col1, col2, col3 = st.columns(3)
-    col1.markdown("### 🌍 " + t("Earth Observation","Observation de la Terre"))
-    col2.markdown("### 🤖 " + t("AI Geospatial","IA Géospatiale"))
-    col3.markdown("### 👥 " + t("Population Mapping","Cartographie Population"))
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
-# =========================================================
-# PROJECTS
-# =========================================================
-elif menu == "Projects":
-    st.title(t("Projects","Projets"))
+<script>
+// Navigation
+function show(id){
+document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+}
 
-    st.markdown("### 🚀 Geospatial Ecosystem")
-    st.markdown("### 📊 Population Mapping Mali")
+// Map
+var map = L.map('map').setView([17,-3],6);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-# =========================================================
-# MONITORING (STREAMLIT EMBED)
-# =========================================================
-elif menu == "Monitoring":
-    st.title(t("Data Collection & Monitoring","Collecte & Suivi"))
+L.marker([12.6,-7.7]).addTo(map).bindPopup("Bamako");
+</script>
 
-    st.markdown("### Application 1")
-    st.components.v1.iframe("https://emop2026.streamlit.app", height=500)
-
-    st.markdown("### Application 2")
-    st.components.v1.iframe("https://suivirich-psifruqpdzgstwtqsocgyp.streamlit.app", height=500)
-
-# =========================================================
-# MAP (LEAFLET → FOLIUM)
-# =========================================================
-elif menu == "Map":
-    st.title(t("Interactive Mali Map","Carte Interactive du Mali"))
-
-    m = folium.Map(location=[17, -3], zoom_start=6)
-
-    regions = [
-        {"name":"Bamako","coords":[12.6,-7.7],
-         "fr":"Bamako — Projets : 5",
-         "en":"Bamako — Projects: 5"},
-        {"name":"Segou","coords":[13.4,-6.5],
-         "fr":"Ségou — Projets : 3",
-         "en":"Segou — Projects: 3"}
-    ]
-
-    for r in regions:
-        folium.Marker(
-            location=r["coords"],
-            popup=r["fr"] if lang=="FR" else r["en"],
-            icon=folium.Icon(color="green")
-        ).add_to(m)
-
-    st_folium(m, width=1200, height=600)
-
-# =========================================================
-# SCHOLAR & ORCID
-# =========================================================
-elif menu == "Scholar":
-    st.title("Scholar & ORCID")
-
-    col1, col2 = st.columns(2)
-
-    with col1:
-        st.markdown("### Google Scholar")
-        st.write("Publications: ---")
-        st.write("Citations: ---")
-        st.write("h-index: ---")
-
-    with col2:
-        st.markdown("### ORCID")
-        st.markdown("[View ORCID Profile](https://orcid.org/0009-0003-7416-1456)")
-
-# =========================================================
-# TIMELINE
-# =========================================================
-elif menu == "Timeline":
-    st.title(t("Research Timeline","Parcours Scientifique"))
-
-    st.write("2025 – AI Geospatial Monitoring")
-    st.write("2024 – Population Mapping")
-    st.write("2023 – Satellite Monitoring")
-
-# =========================================================
-# PARTNERS
-# =========================================================
-elif menu == "Partners":
-    st.title(t("Institutional Partners","Partenaires"))
-
-    col1, col2, col3 = st.columns(3)
-    col1.write("NASA")
-    col2.write("Copernicus")
-    col3.write("World Bank")
-
-# =========================================================
-# FUNDING
-# =========================================================
-elif menu == "Funding":
-    st.title(t("Funding & Grants","Financement"))
-
-    st.write("AI Geospatial – International Grant")
-    st.write("Population Mapping – Government Funding")
-
-# =========================================================
-# CONTACT
-# =========================================================
-elif menu == "Contact":
-    st.title("Contact")
-
-    st.write("📧 mahamadoucamaramoc@outlook.com")
-    st.markdown("[ORCID](https://orcid.org/0009-0003-7416-1456)")
-    st.markdown("[ResearchGate](https://www.researchgate.net/profile/Mahamadou-Camara-2)")
-
-# =========================================================
-# FOOTER
-# =========================================================
-st.markdown("---")
-st.markdown("© 2026 Dr Mahamadou CAMARA | Geospatial Intelligence Platform")
+</body>
+</html>
