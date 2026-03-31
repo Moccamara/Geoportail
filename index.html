@@ -1,146 +1,176 @@
 <!DOCTYPE html>
-<html lang="fr">
-
+<html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Strategic Geospatial Ecosystem</title>
+<title>Strategic Geospatial Ecosystem | Dr Mahamadou Camara</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <style>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
+body{
 font-family:'Poppins',sans-serif;
+margin:0;
+background:#f8fbfd;
+color:#1f2d3d;
 scroll-behavior:smooth;
 }
 
-body{
-background:#071a2b;
+/* Header */
+
+header{
+background:linear-gradient(rgba(0,20,10,0.75),rgba(0,40,20,0.85)),
+url('https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57730/mali_amo_2009240_lrg.jpg');
+background-size:cover;
+background-position:center;
 color:white;
-}
-
-/* NAVBAR */
-
-nav{
-position:fixed;
-width:100%;
-top:0;
-padding:15px 60px;
-background:rgba(5,15,25,0.85);
-display:flex;
-justify-content:space-between;
-align-items:center;
-z-index:999;
-backdrop-filter:blur(10px);
+padding:120px 20px;
+text-align:center;
+position:relative;
 }
 
 .logo{
-height:45px;
+position:absolute;
+top:20px;
+left:20px;
+width:160px;
 }
 
-nav ul{
-display:flex;
-gap:30px;
-list-style:none;
+header h1{
+font-size:46px;
+margin-bottom:10px;
 }
 
-nav ul li{
+header p{
+font-size:18px;
+opacity:0.95;
+}
+
+.hero-badge{
+display:inline-block;
+background:rgba(255,255,255,0.15);
+padding:8px 16px;
+border-radius:20px;
+margin-top:15px;
+}
+
+/* Language */
+
+.lang{
+position:absolute;
+top:20px;
+right:20px;
+background:white;
+color:#003d1f;
+padding:8px 14px;
+border-radius:8px;
 cursor:pointer;
-transition:.3s;
+font-weight:600;
 }
 
-nav ul li:hover{
-color:#00e0ff;
-}
+/* Navigation */
 
-.language{
-border:1px solid #00e0ff;
-padding:5px 12px;
-border-radius:5px;
-cursor:pointer;
-}
-
-/* HERO */
-
-.hero{
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
+nav{
+background:white;
+padding:15px;
 text-align:center;
-background:linear-gradient(120deg,#00111d,#00395a);
+border-bottom:1px solid #eaeaea;
+position:sticky;
+top:0;
+z-index:1000;
 }
 
-.hero h1{
-font-size:52px;
-margin-bottom:15px;
+nav a{
+margin:8px;
+text-decoration:none;
+color:#2c3e50;
+font-weight:500;
+padding:8px 14px;
+border-radius:6px;
+cursor:pointer;
 }
 
-.hero p{
-font-size:20px;
-opacity:.8;
+nav a:hover{
+background:#00994d;
+color:white;
 }
 
-/* SECTIONS */
+/* Sections */
 
 section{
-padding:100px 70px;
+padding:90px 20px;
+display:none;
+}
+
+section.active{
+display:block;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
 }
 
 h2{
-font-size:34px;
+font-size:32px;
 margin-bottom:25px;
-color:#00e0ff;
+color:#003d1f;
 }
 
-/* CARDS */
+/* Cards */
 
 .cards{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
 gap:25px;
 }
 
 .card{
-background:#0d2a40;
-padding:25px;
-border-radius:12px;
+background:white;
+padding:35px;
+border-radius:14px;
+border:1px solid #eef2f7;
 transition:.3s;
 }
 
 .card:hover{
-transform:translateY(-8px);
-background:#124665;
+transform:translateY(-5px);
+box-shadow:0 8px 20px rgba(0,0,0,0.08);
 }
 
-/* MAP */
+.btn{
+display:inline-block;
+padding:10px 18px;
+background:#00994d;
+color:white;
+border-radius:6px;
+text-decoration:none;
+margin-top:15px;
+}
 
-.map iframe{
-width:100%;
+#malimap{
 height:500px;
+border-radius:12px;
+}
+
+iframe{
+width:100%;
+height:600px;
 border:none;
-border-radius:10px;
+border-radius:12px;
 }
 
-/* PARTNERS */
-
-.partner img{
-width:120px;
-}
-
-/* FOOTER */
+/* Footer */
 
 footer{
+background:#003d1f;
+color:white;
+padding:30px;
 text-align:center;
-background:#000;
-padding:25px;
-margin-top:40px;
 }
 
 </style>
@@ -149,193 +179,192 @@ margin-top:40px;
 
 <body>
 
-<!-- NAVBAR -->
+<header>
 
-<nav>
+<img src="STRATEGIC_GEOSPATIAL_ECOSYSTEM_vf.png" class="logo">
 
-<img src="logo.png" class="logo">
-
-<ul>
-<li data-fr="Accueil" data-en="Home">Accueil</li>
-<li data-fr="A propos" data-en="About">About</li>
-<li data-fr="Projets" data-en="Projects">Projects</li>
-<li data-fr="Monitoring" data-en="Monitoring">Monitoring</li>
-<li data-fr="Carte" data-en="Map">Map</li>
-<li data-fr="Recherche" data-en="Research">Research</li>
-<li data-fr="Partenaires" data-en="Partners">Partners</li>
-<li data-fr="Contact" data-en="Contact">Contact</li>
-</ul>
-
-<div class="language" onclick="toggleLanguage()">FR / EN</div>
-
-</nav>
-
-
-<!-- HERO -->
-
-<section class="hero">
-
-<div>
+<div class="lang" onclick="toggleLang()">FR / EN</div>
 
 <h1 data-fr="STRATEGIC GEOSPATIAL ECOSYSTEM"
 data-en="STRATEGIC GEOSPATIAL ECOSYSTEM">
 STRATEGIC GEOSPATIAL ECOSYSTEM
 </h1>
 
-<p
-data-fr="Geospatial Data Scientist | Remote Sensing | AI"
-data-en="Geospatial Data Scientist | Remote Sensing | AI"
->
+<p data-fr="Geospatial Data Scientist | Télédétection | IA"
+data-en="Geospatial Data Scientist | Remote Sensing | AI">
 Geospatial Data Scientist | Remote Sensing | AI
 </p>
 
+<p data-fr="Observation de la Terre • Recherche • Innovation"
+data-en="Earth Observation • Research • Innovation">
+Earth Observation • Research • Innovation
+</p>
+
+<div class="hero-badge"
+data-fr="🌍 Ouvert aux opportunités internationales"
+data-en="🌍 Open to International Opportunities">
+🌍 Open to International Opportunities
 </div>
 
+</header>
+
+<nav>
+
+<a onclick="show('home')" data-fr="Accueil" data-en="Home">Home</a>
+<a onclick="show('about')" data-fr="A propos" data-en="About">About</a>
+<a onclick="show('projects')" data-fr="Projets" data-en="Projects">Projects</a>
+<a onclick="show('monitoring')" data-fr="Monitoring" data-en="Monitoring">Monitoring</a>
+<a onclick="show('map')" data-fr="Carte" data-en="Map">Map</a>
+<a onclick="show('research')" data-fr="Recherche" data-en="Research">Research</a>
+<a onclick="show('contact')" data-fr="Contact" data-en="Contact">Contact</a>
+
+</nav>
+
+<!-- HOME -->
+
+<section id="home" class="active">
+<div class="container">
+
+<h2 data-fr="Portefeuille Géospatial Stratégique"
+data-en="Strategic Geospatial Research Portfolio">
+Strategic Geospatial Research Portfolio
+</h2>
+
+<p
+data-fr="Portfolio international axé sur l'observation de la Terre, l'intelligence artificielle géospatiale et la cartographie de population."
+data-en="International portfolio focused on Earth Observation, Geospatial AI and Population Mapping.">
+International portfolio focused on Earth Observation.
+</p>
+
+</div>
 </section>
-
-
 
 <!-- ABOUT -->
 
-<section>
+<section id="about">
+<div class="container">
 
-<h2 data-fr="A propos" data-en="About">About</h2>
+<h2 data-fr="A propos" data-en="About Me">About</h2>
 
-<p
-data-fr="Plateforme stratégique d'analyse géospatiale intégrant l'intelligence artificielle et l'observation de la Terre."
-data-en="Strategic geospatial analytics platform integrating AI and Earth Observation."
->
-Strategic Geospatial Ecosystem...
-</p>
+<div class="cards">
 
+<div class="card">
+<h3>Profile</h3>
+<p>Geospatial Data Scientist with expertise in satellite monitoring and AI.</p>
+</div>
+
+<div class="card">
+<h3>Research Focus</h3>
+<p>Earth Observation, Population Mapping, Climate Monitoring.</p>
+</div>
+
+<div class="card">
+<h3>Collaboration</h3>
+<p>International research and development collaboration.</p>
+</div>
+
+</div>
+
+</div>
 </section>
-
-
 
 <!-- PROJECTS -->
 
-<section>
+<section id="projects">
+<div class="container">
 
-<h2 data-fr="Projets" data-en="Projects">Projects</h2>
+<h2>Featured Projects</h2>
 
 <div class="cards">
 
 <div class="card">
-<h3>Population Mapping</h3>
-<p>Spatial demographic analysis</p>
+<h3>Population Mapping Mali</h3>
+<p>Digital census and spatial population estimation.</p>
 </div>
 
 <div class="card">
-<h3>Remote Sensing</h3>
-<p>Satellite analytics</p>
+<h3>Satellite Monitoring</h3>
+<p>Earth Observation dashboard and analytics.</p>
 </div>
 
 <div class="card">
-<h3>AI Geospatial</h3>
-<p>Machine learning spatial models</p>
+<h3>Geospatial Ecosystem</h3>
+<p>Strategic geospatial innovation platform.</p>
 </div>
 
 </div>
 
+</div>
 </section>
-
-
 
 <!-- MONITORING -->
 
-<section>
+<section id="monitoring">
+<div class="container">
 
-<h2>Monitoring Dashboards</h2>
+<h2>Live Monitoring</h2>
 
-<div class="cards">
-
-<div class="card">
-Urban Growth Monitoring
-</div>
-
-<div class="card">
-Environmental Monitoring
-</div>
-
-<div class="card">
-Population Monitoring
-</div>
+<iframe src="https://emop2026.streamlit.app/?embed=true"></iframe>
 
 </div>
-
 </section>
-
-
 
 <!-- MAP -->
 
-<section class="map">
+<section id="map">
+<div class="container">
 
-<h2>Interactive Map</h2>
+<h2>Interactive Mali Map</h2>
 
-<iframe src="https://www.openstreetmap.org/export/embed.html"></iframe>
+<div id="malimap"></div>
 
+</div>
 </section>
-
-
 
 <!-- RESEARCH -->
 
-<section>
+<section id="research">
+<div class="container">
 
-<h2>Research</h2>
-
-<div class="cards">
-
-<div class="card">Publications</div>
-<div class="card">Research Projects</div>
-<div class="card">Innovation</div>
-
-</div>
-
-</section>
-
-
-
-<!-- PARTNERS -->
-
-<section>
-
-<h2>Partners</h2>
+<h2>Research & Publications</h2>
 
 <div class="cards">
 
-<div class="card partner">
-<img src="logo1.png">
+<div class="card">
+<h3>Google Scholar</h3>
+<p>Publications and citations</p>
 </div>
 
-<div class="card partner">
-<img src="logo2.png">
-</div>
-
-<div class="card partner">
-<img src="logo3.png">
+<div class="card">
+<h3>ORCID</h3>
+<p>Research profile</p>
 </div>
 
 </div>
 
+</div>
 </section>
-
-
 
 <!-- CONTACT -->
 
-<section>
+<section id="contact">
+<div class="container">
 
 <h2>Contact</h2>
 
-<p>Email</p>
-<p>LinkedIn</p>
-<p>GitHub</p>
+<p>Email: mahamadoucamaramoc@outlook.com</p>
 
+<p>
+ORCID:
+<a href="https://orcid.org/0009-0003-7416-1456" target="_blank">
+0009-0003-7416-1456
+</a>
+</p>
+
+<a class="btn">Download CV</a>
+
+</div>
 </section>
-
-
 
 <footer>
 
@@ -344,25 +373,37 @@ Strategic Geospatial Ecosystem
 
 </footer>
 
-
-
 <script>
 
-let lang="fr";
+function show(id){
+document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+}
 
-function toggleLanguage(){
+/* bilingual */
 
-lang = lang === "fr" ? "en" : "fr";
+let lang="en";
+
+function toggleLang(){
+lang = lang === "en" ? "fr" : "en";
 
 document.querySelectorAll("[data-fr]").forEach(el=>{
-el.innerText = el.getAttribute(`data-${lang}`)
+el.innerText = el.getAttribute("data-"+lang)
 })
-
 }
+
+/* Map */
+
+const map=L.map('malimap').setView([17,-3],6);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+attribution:'© OpenStreetMap'
+}).addTo(map);
+
+L.marker([12.639,-8.002]).addTo(map)
+.bindPopup("Bamako Projects");
 
 </script>
 
-
 </body>
-
 </html>
