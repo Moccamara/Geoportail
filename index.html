@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Strategic Geospatial Ecosystem | Dr Mahamadou Camara</title>
+<title>Strategic Geospatial Ecosystem</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
@@ -12,12 +12,18 @@
 
 <style>
 
+html,body{
+height:100%;
+margin:0;
+}
+
 body{
 font-family:'Poppins',sans-serif;
-margin:0;
-background:#ffffff;
+background:white;
 color:#1f2d3d;
-scroll-behavior:smooth;
+display:flex;
+flex-direction:column;
+min-height:100vh;
 }
 
 /* Header */
@@ -30,6 +36,7 @@ background-position:center;
 color:white;
 padding:120px 20px;
 text-align:center;
+position:relative;
 }
 
 .logo{
@@ -39,52 +46,46 @@ left:20px;
 width:160px;
 }
 
-header h1{
-font-size:46px;
-margin-bottom:10px;
+#lang-switch{
+position:absolute;
+top:20px;
+right:20px;
 }
 
-header p{
-font-size:18px;
-opacity:0.95;
+#lang-switch img{
+width:30px;
+cursor:pointer;
+margin-left:10px;
 }
 
 .hero-badge{
-display:inline-block;
 background:rgba(255,255,255,0.15);
 padding:8px 16px;
 border-radius:20px;
-margin-top:15px;
+display:inline-block;
+margin-top:10px;
 }
 
-/* Navigation */
+/* nav */
 
 nav{
 background:white;
 padding:15px;
 text-align:center;
 border-bottom:1px solid #eaeaea;
-position:sticky;
-top:0;
-z-index:1000;
 }
 
 nav a{
 margin:8px;
-text-decoration:none;
-color:#2c3e50;
-font-weight:500;
-padding:8px 14px;
-border-radius:6px;
 cursor:pointer;
+font-weight:500;
 }
 
 nav a:hover{
-background:#00994d;
-color:white;
+color:#00994d;
 }
 
-/* Sections */
+/* sections */
 
 section{
 padding:90px 20px;
@@ -100,13 +101,6 @@ max-width:1200px;
 margin:auto;
 }
 
-h2{
-font-size:32px;
-margin-bottom:25px;
-}
-
-/* Cards */
-
 .cards{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -116,45 +110,20 @@ gap:25px;
 .card{
 background:white;
 padding:35px;
-border-radius:14px;
+border-radius:12px;
 border:1px solid #eef2f7;
-transition:.3s;
-}
-
-.card:hover{
-transform:translateY(-5px);
-box-shadow:0 8px 20px rgba(0,0,0,0.06);
-}
-
-.btn{
-display:inline-block;
-padding:10px 18px;
-background:#00994d;
-color:white;
-border-radius:6px;
-text-decoration:none;
-margin-top:15px;
 }
 
 #malimap{
 height:500px;
-border-radius:12px;
 }
-
-iframe{
-width:100%;
-height:600px;
-border:none;
-border-radius:12px;
-}
-
-/* Footer */
 
 footer{
 background:#003d1f;
 color:white;
-padding:30px;
 text-align:center;
+padding:25px;
+margin-top:auto;
 }
 
 </style>
@@ -167,168 +136,76 @@ text-align:center;
 
 <img src="STRATEGIC_GEOSPATIAL_ECOSYSTEM_vf.png" class="logo">
 
-<h1>STRATEGIC GEOSPATIAL ECOSYSTEM</h1>
+<div id="lang-switch">
+<img src="https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg" id="fr">
+<img src="https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg" id="en">
+</div>
 
-<p>Geospatial Data Scientist | Remote Sensing | AI</p>
+<h1 data-key="title">STRATEGIC GEOSPATIAL ECOSYSTEM</h1>
 
-<p>Earth Observation • Research • Innovation</p>
+<p data-key="subtitle">
+Geospatial Data Scientist | Remote Sensing | AI
+</p>
 
-<div class="hero-badge">
-🌍 Open to International Opportunities
+<div class="hero-badge" data-key="badge">
+Open to International Opportunities
 </div>
 
 </header>
 
 <nav>
 
-<a onclick="show('home')">Home</a>
-<a onclick="show('about')">About</a>
-<a onclick="show('projects')">Projects</a>
-<a onclick="show('monitoring')">Monitoring</a>
-<a onclick="show('map')">Map</a>
-<a onclick="show('research')">Research</a>
-<a onclick="show('contact')">Contact</a>
+<a onclick="show('home')" data-key="home">Home</a>
+<a onclick="show('projects')" data-key="projects">Projects</a>
+<a onclick="show('map')" data-key="map">Map</a>
+<a onclick="show('contact')" data-key="contact">Contact</a>
 
 </nav>
-
-<!-- HOME -->
 
 <section id="home" class="active">
 <div class="container">
 
-<h2>Strategic Geospatial Research Portfolio</h2>
+<h2 data-key="welcome">Welcome</h2>
 
-<p>
-International portfolio focused on Earth Observation,
-Geospatial AI and Population Mapping.
+<p data-key="desc">
+Strategic Geospatial Research Portfolio
 </p>
 
 </div>
 </section>
 
-<!-- ABOUT -->
-
-<section id="about">
-<div class="container">
-
-<h2>About Me</h2>
-
-<div class="cards">
-
-<div class="card">
-<h3>Profile</h3>
-<p>Geospatial Data Scientist with expertise in satellite monitoring and AI.</p>
-</div>
-
-<div class="card">
-<h3>Research Focus</h3>
-<p>Earth Observation, Population Mapping, Climate Monitoring.</p>
-</div>
-
-<div class="card">
-<h3>Collaboration</h3>
-<p>International research and development collaboration.</p>
-</div>
-
-</div>
-
-</div>
-</section>
-
-<!-- PROJECTS -->
-
 <section id="projects">
 <div class="container">
 
-<h2>Featured Projects</h2>
+<h2 data-key="proj">Projects</h2>
 
 <div class="cards">
 
-<div class="card">
-<h3>Population Mapping Mali</h3>
-<p>Digital census and spatial population estimation.</p>
-</div>
-
-<div class="card">
-<h3>Satellite Monitoring</h3>
-<p>Earth Observation dashboard and analytics.</p>
-</div>
-
-<div class="card">
-<h3>Geospatial Ecosystem</h3>
-<p>Strategic geospatial innovation platform.</p>
-</div>
+<div class="card">Population Mapping Mali</div>
+<div class="card">Satellite Monitoring</div>
+<div class="card">Geospatial AI</div>
 
 </div>
 
 </div>
 </section>
-
-<!-- MONITORING -->
-
-<section id="monitoring">
-<div class="container">
-
-<h2>Live Monitoring</h2>
-
-<iframe src="https://emop2026.streamlit.app/?embed=true"></iframe>
-
-</div>
-</section>
-
-<!-- MAP -->
 
 <section id="map">
 <div class="container">
 
-<h2>Interactive Mali Map</h2>
+<h2 data-key="maptitle">Interactive Map</h2>
 
 <div id="malimap"></div>
 
 </div>
 </section>
 
-<!-- RESEARCH -->
-
-<section id="research">
-<div class="container">
-
-<h2>Research & Publications</h2>
-
-<div class="cards">
-
-<div class="card">
-<h3>Google Scholar</h3>
-<p>Publications and citations</p>
-</div>
-
-<div class="card">
-<h3>ORCID</h3>
-<p>Research profile</p>
-</div>
-
-</div>
-
-</div>
-</section>
-
-<!-- CONTACT -->
-
 <section id="contact">
 <div class="container">
 
-<h2>Contact</h2>
+<h2 data-key="contact">Contact</h2>
 
 <p>Email: mahamadoucamaramoc@outlook.com</p>
-
-<p>
-ORCID:
-<a href="https://orcid.org/0009-0003-7416-1456" target="_blank">
-0009-0003-7416-1456
-</a>
-</p>
-
-<a class="btn">Download CV</a>
 
 </div>
 </section>
@@ -342,21 +219,65 @@ Strategic Geospatial Ecosystem
 
 <script>
 
+/* Sections */
+
 function show(id){
-document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
-document.getElementById(id).classList.add('active');
+document.querySelectorAll('section').forEach(s=>s.classList.remove('active'))
+document.getElementById(id).classList.add('active')
 }
 
-/* Map */
+/* bilingual */
 
-const map=L.map('malimap').setView([17,-3],6);
+let lang="en"
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-attribution:'© OpenStreetMap'
-}).addTo(map);
+const t={
 
-L.marker([12.639,-8.002]).addTo(map)
-.bindPopup("Bamako Projects");
+en:{
+title:"STRATEGIC GEOSPATIAL ECOSYSTEM",
+subtitle:"Geospatial Data Scientist | Remote Sensing | AI",
+badge:"Open to International Opportunities",
+home:"Home",
+projects:"Projects",
+map:"Map",
+contact:"Contact",
+welcome:"Welcome",
+desc:"Strategic Geospatial Research Portfolio",
+proj:"Projects",
+maptitle:"Interactive Map"
+},
+
+fr:{
+title:"ÉCOSYSTÈME GÉOSPATIAL STRATÉGIQUE",
+subtitle:"Scientifique des données géospatiales",
+badge:"Ouvert aux opportunités internationales",
+home:"Accueil",
+projects:"Projets",
+map:"Carte",
+contact:"Contact",
+welcome:"Bienvenue",
+desc:"Portfolio géospatial stratégique",
+proj:"Projets",
+maptitle:"Carte interactive"
+}
+
+}
+
+function update(){
+document.querySelectorAll("[data-key]").forEach(el=>{
+el.innerHTML=t[lang][el.dataset.key]
+})
+}
+
+document.getElementById("fr").onclick=()=>{lang="fr";update()}
+document.getElementById("en").onclick=()=>{lang="en";update()}
+
+update()
+
+/* map */
+
+const map=L.map('malimap').setView([17,-3],6)
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map)
 
 </script>
 
