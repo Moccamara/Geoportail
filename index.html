@@ -20,24 +20,26 @@ body{
 }
 /* Header */
 header{
-  background:linear-gradient(rgba(0,20,10,0.75),rgba(0,40,20,0.85)),
+  background:linear-gradient(rgba(0,40,20,0.75),rgba(0,40,20,0.5)),
   url('https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57730/mali_amo_2009240_lrg.jpg');
   background-size:cover;
   background-position:center;
   color:white;
-  padding:120px 20px;
+  padding:80px 20px;
   text-align:center;
   position:relative;
 }
 .logo{position:absolute;top:20px;left:20px;width:160px;}
-header h1{font-size:46px;margin-bottom:10px;}
-header p{font-size:18px;opacity:0.95;}
+header h1{font-size:42px;margin-bottom:10px;}
+header p{font-size:16px;opacity:0.95;}
 .hero-badge{
   display:inline-block;
-  background:rgba(255,255,255,0.15);
+  background:rgba(0,153,77,0.8);
+  color:white;
   padding:8px 16px;
   border-radius:20px;
   margin-top:15px;
+  font-weight:500;
 }
 
 /* Navigation */
@@ -66,7 +68,7 @@ nav a:hover{
 
 /* Sections */
 section{
-  padding:90px 20px;
+  padding:70px 20px;
   display:none;
 }
 section.active{
@@ -77,8 +79,8 @@ section.active{
   margin:auto;
 }
 h2{
-  font-size:32px;
-  margin-bottom:25px;
+  font-size:30px;
+  margin-bottom:20px;
 }
 
 /* Cards */
@@ -89,7 +91,7 @@ h2{
 }
 .card{
   background:white;
-  padding:35px;
+  padding:30px;
   border-radius:14px;
   border:1px solid #eef2f7;
   transition:.3s;
@@ -136,11 +138,29 @@ iframe{
   background:#006633;
 }
 
+/* Language Buttons */
+.language-buttons{
+  text-align:center;
+  margin:15px;
+}
+.language-buttons button{
+  background:#003d1f;
+  color:white;
+  border:none;
+  border-radius:6px;
+  padding:6px 12px;
+  margin:5px;
+  cursor:pointer;
+}
+.language-buttons button:hover{
+  background:#006633;
+}
+
 /* Footer */
 footer{
   background:#003d1f;
   color:white;
-  padding:30px;
+  padding:25px;
   text-align:center;
 }
 </style>
@@ -167,7 +187,7 @@ footer{
 </nav>
 
 <!-- Language Switch -->
-<div style="text-align:center;margin:15px;">
+<div class="language-buttons">
   <button onclick="switchLanguage('en')">English</button>
   <button onclick="switchLanguage('fr')">Français</button>
 </div>
@@ -200,7 +220,6 @@ footer{
   <div class="container">
     <h2 data-en="Featured Projects" data-fr="Projets en vedette">Featured Projects</h2>
 
-    <!-- Filter Buttons -->
     <div class="filter-buttons">
       <button onclick="filterProjects('all')">All</button>
       <button onclick="filterProjects('population')">Population Mapping</button>
@@ -254,34 +273,26 @@ footer{
 </section>
 
 <footer>
-  © 2026 Dr Mahamadou Camara  
-  <br data-en="" data-fr="">Strategic Geospatial Ecosystem
+  © 2026 Dr Mahamadou Camara<br>
+  Strategic Geospatial Ecosystem
 </footer>
 
 <script>
-// Show section
 function showSection(id){
   document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
 
-// Filter projects
 function filterProjects(category){
   const cards = document.querySelectorAll('#projects .card');
   cards.forEach(card => {
-    if(category==='all' || card.dataset.category===category){
-      card.style.display='block';
-    } else {
-      card.style.display='none';
-    }
+    card.style.display = (category==='all' || card.dataset.category===category)? 'block':'none';
   });
 }
 
-// Language switch
 function switchLanguage(lang){
   document.querySelectorAll('[data-en]').forEach(el=>{
-    if(lang==='en') el.innerText = el.dataset.en;
-    else el.innerText = el.dataset.fr;
+    el.innerText = (lang==='en')? el.dataset.en : el.dataset.fr;
   });
 }
 
