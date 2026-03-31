@@ -11,162 +11,168 @@
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <style>
-/* Fix white space in Streamlit */
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
 
-body {
-    display: flex;
-    flex-direction: column;
-}
-
-main {
-    flex: 1 0 auto;
-}
-
-/* General body */
-body {
-    font-family:'Poppins',sans-serif;
-    background:#ffffff;
-    color:#1f2d3d;
-    scroll-behavior:smooth;
+body{
+  font-family:'Poppins',sans-serif;
+  margin:0;
+  background:#ffffff;
+  color:#1f2d3d;
+  scroll-behavior:smooth;
 }
 
 /* Header */
 header{
-    background:linear-gradient(rgba(0,20,10,0.75),rgba(0,40,20,0.85)),
-    url('https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57730/mali_amo_2009240_lrg.jpg');
-    background-size:cover;
-    background-position:center;
-    color:white;
-    padding:120px 20px;
-    text-align:center;
+  background:linear-gradient(rgba(0,20,10,0.75),rgba(0,40,20,0.85)),
+  url('https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57730/mali_amo_2009240_lrg.jpg');
+  background-size:cover;
+  background-position:center;
+  color:white;
+  padding:120px 20px;
+  text-align:center;
+  position:relative;
 }
 
 .logo{
-    position:absolute;
-    top:20px;
-    left:20px;
-    width:160px;
+  position:absolute;
+  top:20px;
+  left:20px;
+  width:160px;
 }
 
 header h1{
-    font-size:46px;
-    margin-bottom:10px;
+  font-size:46px;
+  margin-bottom:10px;
 }
 
 header p{
-    font-size:18px;
-    opacity:0.95;
+  font-size:18px;
+  opacity:0.95;
 }
 
 .hero-badge{
-    display:inline-block;
-    background:rgba(255,255,255,0.15);
-    padding:8px 16px;
-    border-radius:20px;
-    margin-top:15px;
+  display:inline-block;
+  background:rgba(255,255,255,0.15);
+  padding:8px 16px;
+  border-radius:20px;
+  margin-top:15px;
 }
 
 /* Navigation */
 nav{
-    background:white;
-    padding:15px;
-    text-align:center;
-    border-bottom:1px solid #eaeaea;
-    position:sticky;
-    top:0;
-    z-index:1000;
+  background:white;
+  padding:15px;
+  text-align:center;
+  border-bottom:1px solid #eaeaea;
+  position:sticky;
+  top:0;
+  z-index:1000;
 }
 
 nav a{
-    margin:8px;
-    text-decoration:none;
-    color:#2c3e50;
-    font-weight:500;
-    padding:8px 14px;
-    border-radius:6px;
-    cursor:pointer;
+  margin:8px;
+  text-decoration:none;
+  color:#2c3e50;
+  font-weight:500;
+  padding:8px 14px;
+  border-radius:6px;
+  cursor:pointer;
 }
 
 nav a:hover{
-    background:#00994d;
-    color:white;
+  background:#00994d;
+  color:white;
 }
 
 /* Sections */
 section{
-    padding:90px 20px;
-    display:none;
+  padding:90px 20px;
+  display:none;
 }
 
 section.active{
-    display:block;
+  display:block;
 }
 
 .container{
-    max-width:1200px;
-    margin:auto;
+  max-width:1200px;
+  margin:auto;
 }
 
 h2{
-    font-size:32px;
-    margin-bottom:25px;
+  font-size:32px;
+  margin-bottom:25px;
 }
 
 /* Cards */
 .cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:25px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:25px;
 }
 
 .card{
-    background:white;
-    padding:35px;
-    border-radius:14px;
-    border:1px solid #eef2f7;
-    transition:.3s;
+  background:white;
+  padding:35px;
+  border-radius:14px;
+  border:1px solid #eef2f7;
+  transition:.3s;
 }
 
 .card:hover{
-    transform:translateY(-5px);
-    box-shadow:0 8px 20px rgba(0,0,0,0.06);
+  transform:translateY(-5px);
+  box-shadow:0 8px 20px rgba(0,0,0,0.06);
 }
 
 .btn{
-    display:inline-block;
-    padding:10px 18px;
-    background:#00994d;
-    color:white;
-    border-radius:6px;
-    text-decoration:none;
-    margin-top:15px;
+  display:inline-block;
+  padding:10px 18px;
+  background:#00994d;
+  color:white;
+  border-radius:6px;
+  text-decoration:none;
+  margin-top:15px;
 }
 
 #malimap{
-    height:500px;
-    border-radius:12px;
+  height:500px;
+  border-radius:12px;
 }
 
 iframe{
-    width:100%;
-    height:600px;
-    border:none;
-    border-radius:12px;
+  width:100%;
+  height:600px;
+  border:none;
+  border-radius:12px;
+}
+
+/* Filter buttons */
+.filter-buttons{
+  margin-bottom:20px;
+  text-align:center;
+}
+
+.filter-buttons button{
+  background:#00994d;
+  color:white;
+  border:none;
+  border-radius:6px;
+  padding:8px 16px;
+  margin:5px;
+  cursor:pointer;
+}
+
+.filter-buttons button:hover{
+  background:#006633;
 }
 
 /* Footer */
 footer{
-    background:#003d1f;
-    color:white;
-    padding:30px;
-    text-align:center;
-    flex-shrink:0;
+  background:#003d1f;
+  color:white;
+  padding:30px;
+  text-align:center;
 }
+
 </style>
 
 </head>
@@ -174,113 +180,131 @@ footer{
 <body>
 
 <header>
-<img src="STRATEGIC_GEOSPATIAL_ECOSYSTEM_vf.png" class="logo">
-<h1>STRATEGIC GEOSPATIAL ECOSYSTEM</h1>
-<p>Geospatial Data Scientist | Remote Sensing | AI</p>
-<p>Earth Observation • Research • Innovation</p>
-<div class="hero-badge">🌍 Open to International Opportunities</div>
+  <img src="STRATEGIC_GEOSPATIAL_ECOSYSTEM_vf.png" class="logo">
+  <h1>STRATEGIC GEOSPATIAL ECOSYSTEM</h1>
+  <p>Geospatial Data Scientist | Remote Sensing | AI</p>
+  <p>Earth Observation • Research • Innovation</p>
+  <div class="hero-badge">🌍 Open to International Opportunities</div>
 </header>
 
 <nav>
-<a onclick="show('home')">Home</a>
-<a onclick="show('about')">About</a>
-<a onclick="show('projects')">Projects</a>
-<a onclick="show('monitoring')">Monitoring</a>
-<a onclick="show('map')">Map</a>
-<a onclick="show('research')">Research</a>
-<a onclick="show('contact')">Contact</a>
+  <a onclick="show('home')">Home</a>
+  <a onclick="show('about')">About</a>
+  <a onclick="show('projects')">Projects</a>
+  <a onclick="show('monitoring')">Monitoring</a>
+  <a onclick="show('map')">Map</a>
+  <a onclick="show('research')">Research</a>
+  <a onclick="show('contact')">Contact</a>
 </nav>
 
-<main>
 <!-- HOME -->
 <section id="home" class="active">
-<div class="container">
-<h2>Strategic Geospatial Research Portfolio</h2>
-<p>International portfolio focused on Earth Observation, Geospatial AI and Population Mapping.</p>
-</div>
+  <div class="container">
+    <h2>Strategic Geospatial Research Portfolio</h2>
+    <p>International portfolio focused on Earth Observation, Geospatial AI and Population Mapping.</p>
+  </div>
 </section>
 
 <!-- ABOUT -->
 <section id="about">
-<div class="container">
-<h2>About Me</h2>
-<div class="cards">
-<div class="card"><h3>Profile</h3><p>Geospatial Data Scientist with expertise in satellite monitoring and AI.</p></div>
-<div class="card"><h3>Research Focus</h3><p>Earth Observation, Population Mapping, Climate Monitoring.</p></div>
-<div class="card"><h3>Collaboration</h3><p>International research and development collaboration.</p></div>
-</div>
-</div>
+  <div class="container">
+    <h2>About Me</h2>
+    <div class="cards">
+      <div class="card"><h3>Profile</h3><p>Geospatial Data Scientist with expertise in satellite monitoring and AI.</p></div>
+      <div class="card"><h3>Research Focus</h3><p>Earth Observation, Population Mapping, Climate Monitoring.</p></div>
+      <div class="card"><h3>Collaboration</h3><p>International research and development collaboration.</p></div>
+    </div>
+  </div>
 </section>
 
 <!-- PROJECTS -->
 <section id="projects">
-<div class="container">
-<h2>Featured Projects</h2>
-<div class="cards">
-<div class="card"><h3>Population Mapping Mali</h3><p>Digital census and spatial population estimation.</p></div>
-<div class="card"><h3>Satellite Monitoring</h3><p>Earth Observation dashboard and analytics.</p></div>
-<div class="card"><h3>Geospatial Ecosystem</h3><p>Strategic geospatial innovation platform.</p></div>
-</div>
-</div>
+  <div class="container">
+    <h2>Featured Projects</h2>
+
+    <!-- Filter Buttons -->
+    <div class="filter-buttons">
+      <button onclick="filterProjects('all')">All</button>
+      <button onclick="filterProjects('population')">Population Mapping</button>
+      <button onclick="filterProjects('satellite')">Satellite Monitoring</button>
+      <button onclick="filterProjects('ecosystem')">Geospatial Ecosystem</button>
+    </div>
+
+    <div class="cards">
+      <div class="card" data-category="population"><h3>Population Mapping Mali</h3><p>Digital census and spatial population estimation.</p></div>
+      <div class="card" data-category="satellite"><h3>Satellite Monitoring</h3><p>Earth Observation dashboard and analytics.</p></div>
+      <div class="card" data-category="ecosystem"><h3>Geospatial Ecosystem</h3><p>Strategic geospatial innovation platform.</p></div>
+    </div>
+  </div>
 </section>
 
 <!-- MONITORING -->
 <section id="monitoring">
-<div class="container">
-<h2>Live Monitoring</h2>
-<iframe src="https://emop2026.streamlit.app/?embed=true"></iframe>
-</div>
+  <div class="container">
+    <h2>Live Monitoring</h2>
+    <iframe src="https://emop2026.streamlit.app/?embed=true"></iframe>
+  </div>
 </section>
 
 <!-- MAP -->
 <section id="map">
-<div class="container">
-<h2>Interactive Mali Map</h2>
-<div id="malimap"></div>
-</div>
+  <div class="container">
+    <h2>Interactive Mali Map</h2>
+    <div id="malimap"></div>
+  </div>
 </section>
 
 <!-- RESEARCH -->
 <section id="research">
-<div class="container">
-<h2>Research & Publications</h2>
-<div class="cards">
-<div class="card"><h3>Google Scholar</h3><p>Publications and citations</p></div>
-<div class="card"><h3>ORCID</h3><p>Research profile</p></div>
-</div>
-</div>
+  <div class="container">
+    <h2>Research & Publications</h2>
+    <div class="cards">
+      <div class="card"><h3>Google Scholar</h3><p>Publications and citations</p></div>
+      <div class="card"><h3>ORCID</h3><p>Research profile</p></div>
+    </div>
+  </div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact">
-<div class="container">
-<h2>Contact</h2>
-<p>Email: mahamadoucamaramoc@outlook.com</p>
-<p>ORCID: <a href="https://orcid.org/0009-0003-7416-1456" target="_blank">0009-0003-7416-1456</a></p>
-<a class="btn">Download CV</a>
-</div>
+  <div class="container">
+    <h2>Contact</h2>
+    <p>Email: mahamadoucamaramoc@outlook.com</p>
+    <p>ORCID: <a href="https://orcid.org/0009-0003-7416-1456" target="_blank">0009-0003-7416-1456</a></p>
+    <a class="btn">Download CV</a>
+  </div>
 </section>
-</main>
 
 <footer>
-© 2026 Dr Mahamadou Camara<br>
-Strategic Geospatial Ecosystem
+  © 2026 Dr Mahamadou Camara  
+  <br>Strategic Geospatial Ecosystem
 </footer>
 
 <script>
+// Show section
 function show(id){
-    document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
 }
 
-/* Map */
-const map=L.map('malimap').setView([17,-3],6);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-    attribution:'© OpenStreetMap'
-}).addTo(map);
+// Filter project cards
+function filterProjects(category){
+  const cards = document.querySelectorAll('#projects .card');
+  cards.forEach(card => {
+    if(category === 'all' || card.dataset.category === category){
+      card.style.display = 'block';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
 
-L.marker([12.639,-8.002]).addTo(map)
-.bindPopup("Bamako Projects");
+// Initialize map
+const map = L.map('malimap').setView([17,-3],6);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+  attribution:'© OpenStreetMap'
+}).addTo(map);
+L.marker([12.639,-8.002]).addTo(map).bindPopup("Bamako Projects");
 </script>
 
 </body>
