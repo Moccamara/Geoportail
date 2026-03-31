@@ -1,178 +1,141 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>STRATEGIC GEOSPATIAL ECOSYSTEM | Dr Mahamadou Camara</title>
+<title>STRATEGIC GEOSPATIAL ECOSYSTEM</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <style>
 
-/* ===== GLOBAL ===== */
-
-html,body{
-height:100%;
+*{
 margin:0;
-}
-
-body{
+padding:0;
+box-sizing:border-box;
 font-family:'Poppins',sans-serif;
-background:#ffffff;
-color:#1f2d3d;
-display:flex;
-flex-direction:column;
-min-height:100vh;
 scroll-behavior:smooth;
 }
 
-/* ===== HEADER ===== */
-
-header{
-background:linear-gradient(rgba(0,20,10,0.75),rgba(0,40,20,0.85)),
-url('https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57730/mali_amo_2009240_lrg.jpg');
-background-size:cover;
-background-position:center;
+body{
+background:#0b1f2a;
 color:white;
-padding:120px 20px;
-text-align:center;
-position:relative;
+overflow-x:hidden;
+}
+
+/* NAVBAR */
+
+nav{
+position:fixed;
+top:0;
+width:100%;
+background:rgba(0,0,0,0.85);
+padding:15px 50px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+z-index:999;
+backdrop-filter:blur(10px);
 }
 
 .logo{
-position:absolute;
-top:20px;
-left:20px;
-width:170px;
+height:45px;
 }
 
-#lang-switch{
-position:absolute;
-top:20px;
-right:20px;
+nav ul{
+display:flex;
+gap:25px;
+list-style:none;
 }
 
-#lang-switch img{
-width:32px;
+nav ul li{
 cursor:pointer;
-margin-left:8px;
-}
-
-.hero-badge{
-display:inline-block;
-background:rgba(255,255,255,0.15);
-padding:8px 16px;
-border-radius:20px;
-margin-top:10px;
-}
-
-/* ===== NAV ===== */
-
-nav{
-background:white;
-padding:15px;
-text-align:center;
-border-bottom:1px solid #eaeaea;
-position:sticky;
-top:0;
-z-index:999;
-}
-
-nav a{
-margin:8px;
-text-decoration:none;
-color:#2c3e50;
 font-weight:500;
-padding:8px 14px;
-border-radius:6px;
+transition:.3s;
+}
+
+nav ul li:hover{
+color:#00c3ff;
+}
+
+.language{
 cursor:pointer;
+padding:5px 10px;
+border:1px solid #00c3ff;
+border-radius:5px;
 }
 
-nav a:hover{
-background:#00994d;
-color:white;
-}
-
-/* ===== SECTIONS ===== */
+/* SECTIONS */
 
 section{
-padding:90px 20px;
-display:none;
+padding:100px 60px;
+min-height:100vh;
 }
 
-section.active{
-display:block;
+.hero{
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+background:linear-gradient(120deg,#001b2e,#003b5c);
 }
 
-.container{
-max-width:1200px;
-margin:auto;
+.hero h1{
+font-size:45px;
+margin-bottom:15px;
 }
 
-h2{
-font-size:32px;
-margin-bottom:25px;
+.hero p{
+font-size:18px;
+opacity:.8;
 }
-
-/* ===== CARDS ===== */
 
 .cards{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:25px;
+margin-top:40px;
 }
 
 .card{
-background:white;
-padding:35px;
-border-radius:14px;
-border:1px solid #eef2f7;
+background:#102a3a;
+padding:25px;
+border-radius:10px;
 transition:.3s;
 }
 
 .card:hover{
 transform:translateY(-5px);
-box-shadow:0 8px 20px rgba(0,0,0,0.06);
+background:#123c54;
 }
 
-.btn{
-display:inline-block;
-padding:10px 18px;
-background:#00994d;
-color:white;
-border-radius:6px;
-text-decoration:none;
-margin-top:15px;
+h2{
+font-size:32px;
+margin-bottom:20px;
+color:#00c3ff;
 }
 
-/* ===== MAP ===== */
+/* MAP */
 
-#malimap{
+.map-container{
+margin-top:30px;
 height:500px;
-border-radius:12px;
+border-radius:10px;
+overflow:hidden;
 }
 
-/* ===== DASHBOARD ===== */
-
-iframe{
-width:100%;
-height:600px;
-border:none;
-border-radius:12px;
-margin-top:20px;
-}
-
-/* ===== FOOTER ===== */
+/* FOOTER */
 
 footer{
-background:#003d1f;
-color:white;
-padding:30px;
+background:#000;
 text-align:center;
-margin-top:auto;
+padding:30px;
+}
+
+.partner img{
+max-width:120px;
 }
 
 </style>
@@ -181,166 +144,219 @@ margin-top:auto;
 
 <body>
 
-<header>
 
-<img src="STRATEGIC_GEOSPATIAL_ECOSYSTEM_vf.png" class="logo">
-
-<div id="lang-switch">
-<img src="https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg" id="flag-fr">
-<img src="https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg" id="flag-en">
-</div>
-
-<h1 data-key="title">STRATEGIC GEOSPATIAL ECOSYSTEM</h1>
-
-<p data-key="subtitle">Geospatial Data Scientist | Remote Sensing | AI</p>
-
-<p data-key="subtitle2">Earth Observation • Research • Innovation</p>
-
-<div class="hero-badge" data-key="badge">
-Open to International Opportunities
-</div>
-
-</header>
+<!-- NAVBAR -->
 
 <nav>
 
-<a onclick="show('home')" data-key="navHome">Home</a>
-<a onclick="show('about')" data-key="navAbout">About</a>
-<a onclick="show('projects')" data-key="navProjects">Projects</a>
-<a onclick="show('monitoring')" data-key="navMonitoring">Monitoring</a>
-<a onclick="show('map')" data-key="navMap">Map</a>
-<a onclick="show('research')" data-key="navResearch">Research</a>
-<a onclick="show('contact')" data-key="navContact">Contact</a>
+<img src="logo.png" class="logo">
+
+<ul>
+<li data-fr="Accueil" data-en="Home">Accueil</li>
+<li data-fr="A propos" data-en="About">A propos</li>
+<li data-fr="Projets" data-en="Projects">Projets</li>
+<li data-fr="Monitoring" data-en="Monitoring">Monitoring</li>
+<li data-fr="Carte" data-en="Map">Carte</li>
+<li data-fr="Recherche" data-en="Research">Recherche</li>
+<li data-fr="Contact" data-en="Contact">Contact</li>
+</ul>
+
+<div class="language" onclick="toggleLanguage()">FR / EN</div>
 
 </nav>
 
-<!-- HOME -->
 
-<section id="home" class="active">
-<div class="container">
+<!-- HERO -->
 
-<h2 data-key="homeTitle">Strategic Geospatial Research Portfolio</h2>
+<section class="hero">
 
-<p data-key="homeDesc">
-International portfolio focused on Earth Observation, AI and Population Mapping
+<div>
+
+<h1 data-fr="STRATEGIC GEOSPATIAL ECOSYSTEM"
+data-en="STRATEGIC GEOSPATIAL ECOSYSTEM">
+STRATEGIC GEOSPATIAL ECOSYSTEM
+</h1>
+
+<p
+data-fr="Geospatial Data Scientist | Remote Sensing | AI"
+data-en="Geospatial Data Scientist | Remote Sensing | AI"
+>
+Geospatial Data Scientist | Remote Sensing | AI
 </p>
 
 </div>
+
 </section>
+
+
 
 <!-- ABOUT -->
 
 <section id="about">
-<div class="container">
 
-<h2 data-key="aboutTitle">About</h2>
+<h2 data-fr="A propos" data-en="About">About</h2>
 
-<div class="cards">
+<p
+data-fr="Plateforme stratégique pour l'analyse géospatiale, l'intelligence artificielle et l'observation de la Terre pour la prise de décision."
+data-en="Strategic platform for geospatial analytics, AI and Earth Observation for decision making."
+>
+Plateforme stratégique...
+</p>
 
-<div class="card">
-<h3 data-key="about1">Profile</h3>
-<p data-key="aboutDesc1">Geospatial Data Scientist and Researcher</p>
-</div>
-
-<div class="card">
-<h3 data-key="about2">Research Focus</h3>
-<p data-key="aboutDesc2">Earth Observation and Population Mapping</p>
-</div>
-
-<div class="card">
-<h3 data-key="about3">Collaboration</h3>
-<p data-key="aboutDesc3">International Research Collaboration</p>
-</div>
-
-</div>
-
-</div>
 </section>
+
+
 
 <!-- PROJECTS -->
 
 <section id="projects">
-<div class="container">
 
-<h2 data-key="projectsTitle">Projects</h2>
+<h2 data-fr="Projets" data-en="Projects">Projects</h2>
 
 <div class="cards">
 
-<div class="card">Population Mapping Mali</div>
-<div class="card">Satellite Monitoring</div>
-<div class="card">Geospatial Ecosystem</div>
+<div class="card">
+<h3>Population Mapping</h3>
+<p>Population estimation and mapping</p>
+</div>
 
+<div class="card">
+<h3>Remote Sensing</h3>
+<p>Satellite analysis and monitoring</p>
+</div>
+
+<div class="card">
+<h3>AI Geo Analytics</h3>
+<p>Machine learning spatial analytics</p>
 </div>
 
 </div>
+
 </section>
+
+
 
 <!-- MONITORING -->
 
 <section id="monitoring">
-<div class="container">
 
-<h2 data-key="monitorTitle">Monitoring</h2>
-
-<iframe src="https://emop2026.streamlit.app/?embed=true"></iframe>
-
-<iframe src="https://suivirich-psifruqpdzgstwtqsocgyp.streamlit.app/?embed=true"></iframe>
-
-</div>
-</section>
-
-<!-- MAP -->
-
-<section id="map">
-<div class="container">
-
-<h2 data-key="mapTitle">Interactive Map</h2>
-
-<div id="malimap"></div>
-
-</div>
-</section>
-
-<!-- RESEARCH -->
-
-<section id="research">
-<div class="container">
-
-<h2 data-key="researchTitle">Research</h2>
+<h2 data-fr="Monitoring" data-en="Monitoring">Monitoring</h2>
 
 <div class="cards">
 
 <div class="card">
-Google Scholar
+<h3>Urban Growth</h3>
+<p>Urban expansion monitoring</p>
 </div>
 
 <div class="card">
-ORCID
+<h3>Environment</h3>
+<p>Environmental change detection</p>
+</div>
+
+<div class="card">
+<h3>Population</h3>
+<p>Demographic monitoring</p>
 </div>
 
 </div>
 
-</div>
 </section>
+
+
+
+<!-- MAP -->
+
+<section id="map">
+
+<h2 data-fr="Carte Interactive" data-en="Interactive Map">Map</h2>
+
+<div class="map-container">
+
+<iframe src="https://www.openstreetmap.org/export/embed.html"
+width="100%"
+height="500"
+frameborder="0">
+</iframe>
+
+</div>
+
+</section>
+
+
+
+<!-- RESEARCH -->
+
+<section id="research">
+
+<h2 data-fr="Recherche" data-en="Research">Research</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>Publications</h3>
+<p>Scientific publications</p>
+</div>
+
+<div class="card">
+<h3>Projects</h3>
+<p>Research projects</p>
+</div>
+
+<div class="card">
+<h3>Innovation</h3>
+<p>Geospatial innovation</p>
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- PARTNERS -->
+
+<section id="partners">
+
+<h2 data-fr="Partenaires" data-en="Partners">Partners</h2>
+
+<div class="cards">
+
+<div class="card partner">
+<img src="logo1.png">
+</div>
+
+<div class="card partner">
+<img src="logo2.png">
+</div>
+
+<div class="card partner">
+<img src="logo3.png">
+</div>
+
+</div>
+
+</section>
+
+
 
 <!-- CONTACT -->
 
 <section id="contact">
-<div class="container">
 
-<h2 data-key="contactTitle">Contact</h2>
+<h2 data-fr="Contact" data-en="Contact">Contact</h2>
 
-<p>Email: mahamadoucamaramoc@outlook.com</p>
+<p>Email: your@email.com</p>
 
-<p>
-ORCID:
-<a href="https://orcid.org/0009-0003-7416-1456" target="_blank">
-0009-0003-7416-1456
-</a>
-</p>
+<p>LinkedIn</p>
 
-</div>
+<p>GitHub</p>
+
 </section>
+
+
+
+<!-- FOOTER -->
 
 <footer>
 
@@ -349,86 +365,24 @@ Strategic Geospatial Ecosystem
 
 </footer>
 
+
+
 <script>
 
-/* Navigation */
+let lang="fr";
 
-function show(id){
-document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
-document.getElementById(id).classList.add('active');
-}
+function toggleLanguage(){
 
-/* Bilingual */
+lang = lang === "fr" ? "en" : "fr";
 
-let lang="en"
-
-const translations={
-
-en:{
-title:"STRATEGIC GEOSPATIAL ECOSYSTEM",
-subtitle:"Geospatial Data Scientist | Remote Sensing | AI",
-subtitle2:"Earth Observation • Research • Innovation",
-badge:"Open to International Opportunities",
-navHome:"Home",
-navAbout:"About",
-navProjects:"Projects",
-navMonitoring:"Monitoring",
-navMap:"Map",
-navResearch:"Research",
-navContact:"Contact",
-homeTitle:"Strategic Geospatial Research Portfolio",
-homeDesc:"International portfolio focused on Earth Observation",
-aboutTitle:"About",
-projectsTitle:"Projects",
-monitorTitle:"Monitoring",
-mapTitle:"Interactive Map",
-researchTitle:"Research",
-contactTitle:"Contact"
-},
-
-fr:{
-title:"ÉCOSYSTÈME GÉOSPATIAL STRATÉGIQUE",
-subtitle:"Scientifique des données géospatiales",
-subtitle2:"Observation de la Terre • Recherche • Innovation",
-badge:"Ouvert aux opportunités internationales",
-navHome:"Accueil",
-navAbout:"À propos",
-navProjects:"Projets",
-navMonitoring:"Suivi",
-navMap:"Carte",
-navResearch:"Recherche",
-navContact:"Contact",
-homeTitle:"Portfolio géospatial stratégique",
-homeDesc:"Portfolio international en observation de la Terre",
-aboutTitle:"À propos",
-projectsTitle:"Projets",
-monitorTitle:"Suivi",
-mapTitle:"Carte interactive",
-researchTitle:"Recherche",
-contactTitle:"Contact"
-}
-
-}
-
-function updateLang(){
-document.querySelectorAll("[data-key]").forEach(el=>{
-el.innerHTML=translations[lang][el.dataset.key]
+document.querySelectorAll("[data-fr]").forEach(el=>{
+el.innerText = el.getAttribute(`data-${lang}`)
 })
+
 }
-
-document.getElementById("flag-fr").onclick=()=>{lang="fr";updateLang()}
-document.getElementById("flag-en").onclick=()=>{lang="en";updateLang()}
-
-/* MAP */
-
-const map=L.map('malimap').setView([17,-3],6)
-
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map)
-
-L.marker([12.639,-8.002]).addTo(map)
-.bindPopup("Bamako Projects")
 
 </script>
 
 </body>
+
 </html>
